@@ -47,9 +47,31 @@ public class MainActivity extends AppCompatActivity {
             )) > -1 ) break;
             default: resultTextview.append(myButton.getText());
         }
+        Log.d("expression", resultTextview.getText().toString());
     }
     public String calculate(String expression)
     {
+        try {
+            String op1Str = expression.split("[+\\-*/]")[0];
+            int op1 = Integer.parseInt(op1Str);
+            int op2 = Integer.parseInt(expression.split("[+\\-*/]")[1]);
+            char operator = expression.charAt(op1Str.length());
+
+            Log.d("expression", op1 + "_" + operator + "_" + op2);
+            switch (operator)
+            {
+                case '+': return "" + (op1 + op2);
+                case '-': return "" + (op1 - op2);
+                case '*': return "" + (op1 * op2);
+                case '/': return "" + (op1 / op2);
+                default: return "";
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("exp", e.toString());
+        }
+
         return "NaN";
     }
 }
